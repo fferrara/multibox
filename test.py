@@ -31,10 +31,10 @@ workspace.CreateNet(net)
 LOCATION_PRIOR = np.loadtxt('ipriors800.txt')
 
 def RunOnImage(image, location_prior):
-	img = io.imread(image)
-	img_ = transform.resize(img, (224, 224))
-	img_ = img_.reshape((1, 224, 224, 3)).astype(np.float32) - 0.5
-	workspace.FeedBlob("input", img_, DEVICE_OPTION)
+    img = io.imread(image)
+    img_ = transform.resize(img, (224, 224))
+    img_ = img_.reshape((1, 224, 224, 3)).astype(np.float32) - 0.5
+    workspace.FeedBlob("input", img_, DEVICE_OPTION)
     workspace.RunNet("multibox")
     location = workspace.FetchBlob("imagenet_location_projection").flatten(),
     # Recover the original locations
